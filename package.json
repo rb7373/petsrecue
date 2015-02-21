@@ -1,0 +1,25 @@
+{
+  "name": "petsrescue",
+  "version": "1.0.0",
+  "description": "PetsRescue sitio de rescate animal sin fines de lucro.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rb7373/petsrescue.git"
+  },
+  "keywords": [
+    "Rescate",
+    "Animal",
+    "NodeJS",
+    "AngularJS"
+  ],
+  "author": "Ruben Abarca Navarro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rb7373/petsrescue/issues"
+  },
+  "homepage": "https://github.com/rb7373/petsrescue"
+}

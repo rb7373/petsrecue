@@ -1,0 +1,22 @@
+{
+  "name": "petsrescue",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rb7373/petsrescue",
+  "authors": [
+    "rb7373 <abarca.ruben73@gmail.com>"
+  ],
+  "description": "PetsRescue sitio de rescate animal sin fines de lucro.",
+  "keywords": [
+    "Rescate",
+    "Animal"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
