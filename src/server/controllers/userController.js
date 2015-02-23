@@ -1,13 +1,13 @@
+"use strict";
+
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var encrypt = require('../utilities/encryption');
-
 exports.getUsers = function (req, res) {
   User.find({}).exec(function (err, collection) {
     res.send(collection);
   });
 };
-
 exports.createUser = function (req, res, next) {
   var userData = req.body;
   userData.username = userData.username.toLowerCase();
@@ -19,9 +19,7 @@ exports.createUser = function (req, res, next) {
         err = new Error('Duplicate email');
       }
       res.status(400);
-      return res.send({
-        reason: err.toString()
-      });
+      return res.send({ reason: err.toString() });
     }
     req.logIn(user, function (err) {
       if (err) {
@@ -31,7 +29,6 @@ exports.createUser = function (req, res, next) {
     });
   });
 };
-
 exports.updateUser = function (req, res) {
   var userUpdates = req.body;
   if (req.user._id !== userUpdates._id && !req.user.hasRole('admin')) {
@@ -48,9 +45,7 @@ exports.updateUser = function (req, res) {
   req.user.save(function (err) {
     if (err) {
       res.status(400);
-      return res.send({
-        reason: err.toString()
-      });
+      return res.send({ reason: err.toString() });
     }
     res.send(req.user);
   });

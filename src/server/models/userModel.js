@@ -1,6 +1,7 @@
+"use strict";
+
 var mongoose = require('mongoose');
 var encrypt = require('../utilities/encryption');
-
 var userSchema = mongoose.Schema({
   firstName: {
     type: String,
@@ -34,7 +35,6 @@ userSchema.methods = {
   }
 };
 var User = mongoose.model('User', userSchema);
-
 function createDefaultUsers() {
   User.find({}).exec(function (err, collection) {
     if (collection.length === 0) {
@@ -42,7 +42,7 @@ function createDefaultUsers() {
       salt = encrypt.createSalt();
       hash = encrypt.hashPwd(salt, 'a');
       User.create({
-        firstName: 'Rubén',
+        firstName: 'Rub\xE9n',
         lastName: 'Abarca Navarro',
         username: 'a@a',
         salt: salt,
@@ -71,5 +71,4 @@ function createDefaultUsers() {
     }
   });
 }
-
 exports.createDefaultUsers = createDefaultUsers;

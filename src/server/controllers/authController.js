@@ -1,5 +1,6 @@
-var passport = require('passport');
+"use strict";
 
+var passport = require('passport');
 exports.authenticate = function (req, res, next) {
   req.body.username = req.body.username.toLowerCase();
   var auth = passport.authenticate('local', function (err, user) {
@@ -7,9 +8,7 @@ exports.authenticate = function (req, res, next) {
       return next(err);
     }
     if (!user) {
-      res.send({
-        success: false
-      });
+      res.send({ success: false });
     }
     req.logIn(user, function (err) {
       if (err) {
@@ -23,7 +22,6 @@ exports.authenticate = function (req, res, next) {
   });
   auth(req, res, next);
 };
-
 exports.requiresApiLogin = function (req, res, next) {
   if (!req.isAuthenticated()) {
     res.status(403);
@@ -32,7 +30,6 @@ exports.requiresApiLogin = function (req, res, next) {
     next();
   }
 };
-
 exports.requiresRole = function (role) {
   return function (req, res, next) {
     if (!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {

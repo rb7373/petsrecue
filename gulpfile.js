@@ -1,8 +1,9 @@
+"use strict";
+
 var gulp = require('gulp');
 var args = require('yargs').argv;
 var config = require('./gulp.config')();
 var del = require('del');
-
 var jshint = require('gulp-jshint');
 //var stylish = require('jshint-stylish'); //Optional
 var summary = require('jshint-summary');
@@ -14,7 +15,7 @@ var less = require('gulp-less');
 var autoprefixer = require('gulp-autoprefixer');
 var fixmyjs = require("gulp-fixmyjs");
 
-gulp.task('vet', function () {
+gulp.task('vet', function() {
   log('Analyzing source with JSHint and JSCS');
 
   return gulp
@@ -27,13 +28,13 @@ gulp.task('vet', function () {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('fix', function () {
+gulp.task('fix', function() {
   log('Fixing');
   return gulp
     .src(config.allJs)
     .pipe(gulpIf(args.verbose, gulpPrint()))
     .pipe(fixmyjs())
-    .pipe(gulp.dest("./tmp2"));;
+    .pipe(gulp.dest("./src"));
 });
 
 gulp.task('styless', ['clean-styles'], function() {
@@ -45,12 +46,12 @@ gulp.task('styless', ['clean-styles'], function() {
     .pipe(gulp.dest(config.temp));
 });
 
-gulp.task('clean-styles', function (done) {
+gulp.task('clean-styles', function(done) {
   var files = config.temp + '**/*.css';
   clean(files, done);
 });
 
-gulp.task('less-watcher', function () {
+gulp.task('less-watcher', function() {
   gulp.watch([config.less], ['styles']);
 });
 
@@ -59,7 +60,7 @@ gulp.task('less-watcher', function () {
 function clean(path, done) {
   log('Cleaning: ' + util.colors.red(path));
   del(path, done);
-}
+};
 
 function log(msg) {
   if (typeof(msg) === 'object') {
@@ -71,4 +72,4 @@ function log(msg) {
   } else {
     util.log(util.colors.blue(msg));
   }
-}
+};
