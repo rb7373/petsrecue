@@ -1,12 +1,10 @@
 "use strict";
 
-module.exports = function () {
+module.exports = function() {
   var client = './src/client/';
+  var clientApp = client + 'app/';
   var config = {
     temp: './.tmp/',
-
-    less: client + 'styles/styles.less',
-
     /**
      * Files path
      */
@@ -14,10 +12,12 @@ module.exports = function () {
       './src/**/*.js',
       './*.js'
     ],
-    distAllJs: [
-      './src/**/*.js',
-      './*.js'
+    index: client + 'index.html',
+    js: [
+      
     ]
+    ,
+    less: client + 'styles/styles.less'
   };
 
   return config;

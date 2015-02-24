@@ -3,17 +3,17 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var encrypt = require('../utilities/encryption');
-exports.getUsers = function (req, res) {
-  User.find({}).exec(function (err, collection) {
+exports.getUsers = function(req, res) {
+  User.find({}).exec(function(err, collection) {
     res.send(collection);
   });
 };
-exports.createUser = function (req, res, next) {
+exports.createUser = function(req, res, next) {
   var userData = req.body;
   userData.username = userData.username.toLowerCase();
   userData.salt = encrypt.createSalt();
   userData.hashedPwd = encrypt.hashPwd(userData.salt, userData.password);
-  User.create(userData, function (err, user) {
+  User.create(userData, function(err, user) {
     if (err) {
       if (err.toString().indexOf('E11000') > -1) {
         err = new Error('Duplicate email');
@@ -21,7 +21,7 @@ exports.createUser = function (req, res, next) {
       res.status(400);
       return res.send({ reason: err.toString() });
     }
-    req.logIn(user, function (err) {
+    req.logIn(user, function(err) {
       if (err) {
         return next(err);
       }
@@ -29,7 +29,7 @@ exports.createUser = function (req, res, next) {
     });
   });
 };
-exports.updateUser = function (req, res) {
+exports.updateUser = function(req, res) {
   var userUpdates = req.body;
   if (req.user._id !== userUpdates._id && !req.user.hasRole('admin')) {
     res.status(403);
@@ -42,7 +42,7 @@ exports.updateUser = function (req, res) {
     req.user.sale = encrypt.createSalt();
     req.user.hashedPwd = encrypt.hashPwd(req.user.sale, userUpdates.password);
   }
-  req.user.save(function (err) {
+  req.user.save(function(err) {
     if (err) {
       res.status(400);
       return res.send({ reason: err.toString() });

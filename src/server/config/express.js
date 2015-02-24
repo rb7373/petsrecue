@@ -10,7 +10,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
-module.exports = function (app, config) {
+module.exports = function(app, config) {
   function compile(str, path) {
     return stylus(str).set('filename', path);
   }

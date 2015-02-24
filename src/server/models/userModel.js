@@ -27,16 +27,16 @@ var userSchema = mongoose.Schema({
   roles: [String]
 });
 userSchema.methods = {
-  authenticate: function (passwordToMatch) {
+  authenticate: function(passwordToMatch) {
     return encrypt.hashPwd(this.salt, passwordToMatch) === this.hashedPwd;
   },
-  hasRole: function (role) {
+  hasRole: function(role) {
     return this.roles.indexOf(role) > -1;
   }
 };
 var User = mongoose.model('User', userSchema);
 function createDefaultUsers() {
-  User.find({}).exec(function (err, collection) {
+  User.find({}).exec(function(err, collection) {
     if (collection.length === 0) {
       var salt, hash;
       salt = encrypt.createSalt();
@@ -71,4 +71,5 @@ function createDefaultUsers() {
     }
   });
 }
+
 exports.createDefaultUsers = createDefaultUsers;
